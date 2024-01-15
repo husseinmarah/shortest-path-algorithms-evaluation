@@ -12,9 +12,9 @@ static File file;
 static FileWriter output;
 static CSVWriter writer;
 
-public static void createCSVFile() {
+public static void createCSVFile(String name) {
     // create the csv file to store the coordinates
-    String filename = String.format("dataset\\bellman_results.csv");
+    String filename = String.format("dataset\\%s_results.csv",name);
     file = new File(filename);
     if (file.exists() && !file.isDirectory()) {
         System.out.println("CSV File Is Already Exists: " + filename);
@@ -32,7 +32,7 @@ public static void createCSVFile() {
             e.printStackTrace();
         }
         writer = new CSVWriter(output);
-        String[] header = {"Rows", "Columns", "Iteration", "Time Median"};
+        String[] header = {"Rows", "Columns", "Number of Cells", "Iteration", "Median Time", "Average Time"};
         writer.writeNext(header);
     }
 }

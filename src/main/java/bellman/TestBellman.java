@@ -1,19 +1,17 @@
 package bellman;
 
-import com.opencsv.CSVWriter;
 import common.CSVFile;
 import common.Statistics;
 import grid.GridCell;
 import grid.GridEnvironment;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
 //@SuppressWarnings({"squid:S106", "PMD.SystemPrintln"}) // System.out is OK in this test program
 public class TestBellman {
 
-private static final int MAX_WARMUPS = 1;
+private static final int MAX_WARMUPS = 2;
 private static final int MAX_ITERATIONS = 5;
 
 private static final int MIN_ROWS = 1000;
@@ -22,12 +20,10 @@ private static final int MIN_COLS = 1000;
 private static final int MAX_COLS = 5000;
 
 private static final Map<Integer, List<Long>> TIMES = new HashMap<>();
-static FileWriter output;
-static CSVWriter writer;
 private static int blackhole = 0;
 
 public static void main(String[] args) throws IOException {
-    CSVFile.createCSVFile();
+    CSVFile.createCSVFile(TestBellman.class.getPackageName());
     Robot robot = new Robot(0, 0, 100); // Example initial position and battery level.
 
     for (int i = 0; i < MAX_WARMUPS; i++) {
@@ -57,12 +53,13 @@ private static void runTests(int iteration, boolean warmup, Robot robot) throws 
                 List<Long> times = TIMES.computeIfAbsent(numRows * numCols, k -> new ArrayList<>());
                 times.add(time);
                 long median = Statistics.median(times);
+                long average = Statistics.average(times);
                 System.out.printf(
                         Locale.US,
-                        "  -->  Median after %2d iterations = %,8.1f ms",
+                        "  --> After %2d iterations, Median = %,8.1f ms, Average = %,8.1f ms",
                         iteration + 1,
-                        median / 1_000_000.0);
-                String[] csvData = {String.valueOf(numRows), String.valueOf(numCols), String.valueOf(iteration), String.valueOf(median)};
+                        median / 1_000_000.0, average / 1_000_000.0);
+                String[] csvData = {String.valueOf(numRows), String.valueOf(numCols), String.valueOf(numRows * numCols), String.valueOf(iteration), String.valueOf(median / 1_000_000.0), String.valueOf(average / 1_000_000.0)};
                 CSVFile.updateCSV(csvData);
             }
             System.out.println();
