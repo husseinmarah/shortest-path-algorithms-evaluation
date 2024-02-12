@@ -23,12 +23,13 @@ public class RunBellman {
         gridEnvironment.addChargingStation(1, 29);
         gridEnvironment.addChargingStation(10,10);
         gridEnvironment.addChargingStation(6,10);
+        gridEnvironment.addChargingStation(28,2);
 
         // Print the grid to visualize the environment
         gridEnvironment.print();
 
         // Create and initialize the robot position
-        Robot robot = new Robot(29, 1, 100); // Example initial position and battery level.
+        Robot robot = new Robot(1, 1, 100); // Example initial position and battery level.
         // Find the nearest charging station using Dijkstra's algorithm.
 
         // Set the source cell

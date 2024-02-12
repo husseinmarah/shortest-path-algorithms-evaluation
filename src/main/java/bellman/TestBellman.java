@@ -11,8 +11,8 @@ import java.util.*;
 //@SuppressWarnings({"squid:S106", "PMD.SystemPrintln"}) // System.out is OK in this test program
 public class TestBellman {
 
-private static final int MAX_WARMUPS = 2;
-private static final int MAX_ITERATIONS = 5;
+private static final int MAX_WARMUPS = 5;
+private static final int MAX_ITERATIONS = 10;
 
 private static final int MIN_ROWS = 1000;
 private static final int MAX_ROWS = 5000;
