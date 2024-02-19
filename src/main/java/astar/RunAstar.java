@@ -26,19 +26,20 @@ public class RunAstar {
         Robot robot = new Robot(4, 4, 100); // Example initial position and battery level.
         // Find the nearest charging station using Dijkstra's algorithm.
 
-        GridCell nearestChargingStation = robot.findNearestChargingStation(gridEnvironment.gridCells);
-        if (nearestChargingStation!=null) {
-            System.out.println("Nearest Charging Station = " + "[" + nearestChargingStation.row + "]" + "[" + nearestChargingStation.col + "]");
+        GridCell destination = new GridCell(1, 21, false,false, false);
+        GridCell finalDestination = robot.findDestinationStation(gridEnvironment.gridCells, destination);
+        if (finalDestination!=null) {
+            System.out.println("Final Destination = " + "[" + finalDestination.row + "]" + "[" + finalDestination.col + "]");
         }
 
-        executePath(robot, nearestChargingStation);
+        executePath(robot, finalDestination);
         printGrid(gridEnvironment.gridCells);
     }
 
-    public static void executePath(Robot robot, GridCell nearestChargingStation) {
-        List<GridCell> shortestPath = robot.returnShortestPath(nearestChargingStation);
+    public static void executePath(Robot robot, GridCell destinationStation) {
+        List<GridCell> shortestPath = robot.returnShortestPath(destinationStation);
 
-        if (nearestChargingStation != null) {
+        if (destinationStation != null) {
             if (shortestPath.isEmpty()) {
                 System.out.println("No path to the nearest charging station found.");
             } else {

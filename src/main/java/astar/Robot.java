@@ -15,65 +15,52 @@ class Robot {
         this.batteryLevel = batteryLevel;
     }
 
+    public void usingAStar(GridCell[][] grid, GridCell currentCell, PriorityQueue<GridCell> pq, GridCell destination) {
+        for (int[] dir : directions) {
+            int newRow = currentCell.row + dir[0];
+            int newCol = currentCell.col + dir[1];
 
-        public void usingAStar(GridCell[][] grid, GridCell currentCell, PriorityQueue<GridCell> pq) {
-            // This loop enables the robot to move only in four directions (using Manhattan distance)
-            for (int[] dir : directions) {
-                int newRow = currentCell.row + dir[0];
-                int newCol = currentCell.col + dir[1];
+            if (isValid(newRow, newCol, grid) && !grid[newRow][newCol].isObstacle) {
+                GridCell neighbor = grid[newRow][newCol];
+                int newDistance = currentCell.distance + 1; // Assuming uniform cost
 
-                if (isValid(newRow, newCol, grid) && !grid[newRow][newCol].isObstacle) {
-                    int newDistance = currentCell.distance + 1;
-                    GridCell neighbor = grid[newRow][newCol];
-
-                    if (newDistance < neighbor.distance) {
-                        neighbor.distance = newDistance;
-                        neighbor.parent = currentCell;
-                        pq.add(neighbor);
-                    }
+                if (newDistance < neighbor.distance) {
+                    neighbor.distance = newDistance;
+                    neighbor.parent = currentCell;
+                    int heuristic = calculateHeuristic(neighbor, destination);
+                    neighbor.heuristic = heuristic;
+                    pq.add(neighbor);
                 }
             }
         }
-
-    public int calculateHeuristic(GridCell cell, GridCell[][] grid) {
-        int minDistance = Integer.MAX_VALUE;
-
-        // Iterate through the grid to find the nearest unvisited cell
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (!grid[i][j].isVisited) {
-                    int distance = Math.abs(cell.row - i) + Math.abs(cell.col - j);
-                    minDistance = Math.min(minDistance, distance);
-                }
-            }
-        }
-
-        return minDistance;
     }
 
+    public int calculateHeuristic(GridCell cell, GridCell destination) {
+        // Assuming Manhattan distance heuristic
+        return Math.abs(cell.row - destination.row) + Math.abs(cell.col - destination.col);
+    }
 
-    public GridCell findNearestChargingStation(GridCell[][] grid) {
+    public GridCell findDestinationStation(GridCell[][] grid, GridCell destination) {
         PriorityQueue<GridCell> pq = new PriorityQueue<>(Comparator.comparingInt(cell ->
-                cell.distance + calculateHeuristic(cell, grid)));
+                cell.distance + cell.heuristic));
         grid[currentRow][currentCol].distance = 0;
         pq.add(grid[currentRow][currentCol]);
 
         while (!pq.isEmpty()) {
             GridCell currentCell = pq.poll();
-            if (currentCell.isChargingStation) {
-                return currentCell; // Found the nearest charging station
+            if (currentCell.col==destination.col && currentCell.row == destination.row) {
+                return currentCell; // Found the destination
             }
 
-            usingAStar(grid, currentCell, pq);
-
+            usingAStar(grid, currentCell, pq, destination);
         }
 
         return null; // No charging station found
     }
 
-    public List<GridCell> returnShortestPath(GridCell chargingStation) {
-        if (chargingStation != null) {
-            return reconstructPath(chargingStation);
+    public List<GridCell> returnShortestPath(GridCell destination) {
+        if (destination != null) {
+            return reconstructPath(destination);
         } else {
             return new ArrayList<>(); // No path to any charging station found
         }
@@ -83,9 +70,9 @@ class Robot {
         return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
     }
 
-    private List<GridCell> reconstructPath(GridCell chargingStation) {
+    private List<GridCell> reconstructPath(GridCell destination) {
         List<GridCell> path = new ArrayList<>();
-        GridCell currentCell = chargingStation;
+        GridCell currentCell = destination;
 
         while (currentCell != null) {
             path.add(currentCell);
