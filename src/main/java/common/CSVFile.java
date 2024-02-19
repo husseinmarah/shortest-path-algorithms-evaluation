@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Logger;
 import com.opencsv.CSVWriter;
-
+/**
+ *@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+ */
 public class CSVFile {
 static Logger logger = Logger.getLogger(CSVFile.class.getName());
 static File file;

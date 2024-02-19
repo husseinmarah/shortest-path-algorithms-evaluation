@@ -2,17 +2,17 @@ package bellman;
 
 import grid.GridCell;
 import grid.GridEnvironment;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static common.Helpers.printGrid;
 import static common.Helpers.printPath;
-
+/**
+ *@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+ */
 /* The implementation of the Bellman-Ford algorithm for finding the shortest path
-* in a grid environment.*/
-
+ * in a grid environment.*/
 public class RunBellman {
     public static void main(String[] args) {
 
@@ -24,6 +24,8 @@ public class RunBellman {
         gridEnvironment.addChargingStation(10,10);
         gridEnvironment.addChargingStation(6,10);
         gridEnvironment.addChargingStation(28,2);
+
+        gridEnvironment.traverseGrid();
 
         // Print the grid to visualize the environment
         gridEnvironment.print();

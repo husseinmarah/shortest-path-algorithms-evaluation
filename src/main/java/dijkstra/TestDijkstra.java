@@ -12,20 +12,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-@SuppressWarnings({"squid:S106", "PMD.SystemPrintln"}) // System.out is OK in this test program
+/**
+ *@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+ */
 public class TestDijkstra {
-
     private static final int MAX_WARMUPS = 5;
     private static final int MAX_ITERATIONS = 10;
-
     private static final int MIN_ROWS = 1000;
     private static final int MAX_ROWS = 5000;
     private static final int MIN_COLS = 1000;
     private static final int MAX_COLS = 5000;
-
     private static final Map<Integer, List<Long>> TIMES = new HashMap<>();
-
     private static int blackhole = 0;
 
     public static void main(String[] args) throws IOException {

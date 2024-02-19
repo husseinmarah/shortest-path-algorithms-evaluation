@@ -11,6 +11,7 @@ public class GridCell {
     public boolean isCurrent;
     public int distance;
     public GridCell parent;
+    public int heuristic;
 
     public GridCell(int row, int col, boolean isObstacle, boolean isChargingStation, boolean isCurrent) {
         this.row = row;

@@ -5,7 +5,9 @@ import grid.GridEnvironment;
 import java.util.List;
 
 import static common.Helpers.printGrid;
-
+/**
+ *@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+ */
 public class RunDijkstra {
     public static void main(String[] args) {
         // Create the grid and initialize it with obstacles and charging stations.

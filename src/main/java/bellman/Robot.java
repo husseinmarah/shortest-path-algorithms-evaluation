@@ -1,11 +1,13 @@
 package bellman;
 
 import grid.GridCell;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+ */
 public class Robot {
 private static final int INF = Integer.MAX_VALUE;
 static GridCell currentCell;

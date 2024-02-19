@@ -8,6 +8,10 @@ import grid.GridEnvironment;
 import java.io.IOException;
 import java.util.*;
 
+/**
+*@author <a href="https://github.com/husseinmarah">Hussein Marah</a>
+*/
+
 //@SuppressWarnings({"squid:S106", "PMD.SystemPrintln"}) // System.out is OK in this test program
 public class TestBellman {
 

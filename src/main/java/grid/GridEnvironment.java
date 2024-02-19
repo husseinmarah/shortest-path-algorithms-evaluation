@@ -23,8 +23,9 @@ public class GridEnvironment {
             }
         }
     }
-    public void setCurrentPosition(Robot robot){
-        if(Objects.nonNull(Robot.getCurrentCell())) {
+
+    public void setCurrentPosition(Robot robot) {
+        if (Objects.nonNull(Robot.getCurrentCell())) {
             int tempRow = Robot.getCurrentCell().row;
             int tempCol = Robot.getCurrentCell().col;
             gridCells[tempRow][tempCol] = new GridCell(tempRow, tempCol, false, false, true);
@@ -115,6 +116,22 @@ public class GridEnvironment {
                 }
             }
             System.out.println(); // Move to the next row
+        }
+    }
+
+    public void traverseGrid() {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                if (gridCells[i][j].isChargingStation) {
+                    System.out.println("Cell [" + i + "][" + j + "] - Type: " + "Charging Station");
+                } else if (gridCells[i][j].isObstacle) {
+                    System.out.println("Cell [" + i + "][" + j + "] - Type: " + "Obstacle");
+                }
+                else {
+                    System.out.println("Cell [" + i + "][" + j + "] - Type: " + "Free");
+                }
+                // You can perform any other operation on the cell here
+            }
         }
     }
 
