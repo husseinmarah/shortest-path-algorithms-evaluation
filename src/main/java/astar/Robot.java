@@ -9,6 +9,8 @@ class Robot {
     int currentRow, currentCol;
     static int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Possible movement directions (up, down, left, right)
 
+    GridCell[][] currentPosition;
+
     public Robot(int currentRow, int currentCol, int batteryLevel) {
         this.currentRow = currentRow;
         this.currentCol = currentCol;
@@ -33,6 +35,16 @@ class Robot {
                 }
             }
         }
+    }
+
+    public GridCell getCurrentPosition() {
+        return currentPosition[currentCol][currentRow];
+    }
+
+    public void setCurrentPosition(int currentCol, int currentRow) {
+        this.currentCol = currentCol;
+        this.currentRow = currentRow;
+
     }
 
     public int calculateHeuristic(GridCell cell, GridCell destination) {
