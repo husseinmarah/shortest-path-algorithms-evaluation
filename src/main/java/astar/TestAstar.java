@@ -13,7 +13,7 @@ import java.util.*;
 //@SuppressWarnings({"squid:S106", "PMD.SystemPrintln"}) // System.out is OK in this test program
 public class TestAstar {
 
-    private static final int MAX_WARMUPS = 1;
+    private static final int MAX_WARMUPS = 5;
     private static final int MAX_ITERATIONS = 10;
 
     private static final int MIN_ROWS = 1000;
@@ -27,7 +27,7 @@ public class TestAstar {
 
     public static void main(String[] args) throws IOException {
         CSVFile.createCSVFile(TestAstar.class.getPackageName());
-        Robot robot = new Robot(4, 4, 100); // Example initial position and battery level.
+        Robot robot = new Robot(0, 0, 100); // Example initial position and battery level.
         for (int i = 0; i < MAX_WARMUPS; i++) {
             runTests(i, true, robot);
         }
@@ -73,29 +73,34 @@ public class TestAstar {
         GridCell shortestPath = null;
         long time = 0;
         while (shortestPath == null) {
-            GridEnvironment gridEnvironment = new GridEnvironment(numRows, numCols);
-            // Add obstacles and charging stations randomly
-            gridEnvironment.addObstacle(1, 6);
-            gridEnvironment.addObstacle(1, 3);
-            gridEnvironment.addObstacle(3, 4);
-            gridEnvironment.addObstacle(4, 1);
-            gridEnvironment.addObstacle(4, 7);
-            gridEnvironment.addObstacle(6, 5);
-            gridEnvironment.addObstacle(6, 9);
-            gridEnvironment.addObstacle(8, 2);
-            gridEnvironment.addObstacle(9, 6);
-            gridEnvironment.addChargingStation(1, 1);
-            gridEnvironment.addChargingStation(2, 7);
-            gridEnvironment.addChargingStation(6, 2);
-            gridEnvironment.addChargingStation(8, 8);
+            GridEnvironment gridEnvironment = getGridEnvironment(numRows, numCols);
 
             time = System.nanoTime();
-            GridCell destination = new GridCell(8, 8, false,false, false);
+            GridCell destination = new GridCell(8, 8,false,false, false);
             shortestPath = robot.findDestinationStation(gridEnvironment.gridCells, destination);
             System.out.println("Destination Station = " + "[" + shortestPath.row + "]" + "[" + shortestPath.col + "]");
             time = System.nanoTime() - time;
         }
 //        blackhole += shortestPath.size();
         return time;
+    }
+
+    private static GridEnvironment getGridEnvironment(int numRows, int numCols) {
+        GridEnvironment gridEnvironment = new GridEnvironment(numRows, numCols);
+        // Add obstacles and charging stations randomly
+        gridEnvironment.addObstacle(1, 6);
+        gridEnvironment.addObstacle(1, 3);
+        gridEnvironment.addObstacle(3, 4);
+        gridEnvironment.addObstacle(4, 1);
+        gridEnvironment.addObstacle(4, 7);
+        gridEnvironment.addObstacle(6, 5);
+        gridEnvironment.addObstacle(6, 9);
+        gridEnvironment.addObstacle(8, 2);
+        gridEnvironment.addObstacle(9, 6);
+        gridEnvironment.addChargingStation(1, 1);
+        gridEnvironment.addChargingStation(2, 7);
+        gridEnvironment.addChargingStation(6, 2);
+        gridEnvironment.addChargingStation(8, 8);
+        return gridEnvironment;
     }
 }

@@ -74,6 +74,7 @@ public class TestDijkstra {
         GridCell shortestPath = null;
         long time = 0;
         while (shortestPath == null) {
+            // Create the grid and initialize it with obstacles and charging stations.
             GridEnvironment gridEnvironment = new GridEnvironment(numRows, numCols);
             // Add obstacles and charging stations randomly
 //            gridEnvironment.addMultiObstacles(6);
