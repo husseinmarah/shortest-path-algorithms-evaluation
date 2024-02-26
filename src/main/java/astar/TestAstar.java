@@ -75,10 +75,22 @@ public class TestAstar {
         while (shortestPath == null) {
             GridEnvironment gridEnvironment = new GridEnvironment(numRows, numCols);
             // Add obstacles and charging stations randomly
-            gridEnvironment.addMultiObstacles(6);
-            gridEnvironment.addMultiChargingStation(5);
+            gridEnvironment.addObstacle(1, 6);
+            gridEnvironment.addObstacle(1, 3);
+            gridEnvironment.addObstacle(3, 4);
+            gridEnvironment.addObstacle(4, 1);
+            gridEnvironment.addObstacle(4, 7);
+            gridEnvironment.addObstacle(6, 5);
+            gridEnvironment.addObstacle(6, 9);
+            gridEnvironment.addObstacle(8, 2);
+            gridEnvironment.addObstacle(9, 6);
+            gridEnvironment.addChargingStation(1, 1);
+            gridEnvironment.addChargingStation(2, 7);
+            gridEnvironment.addChargingStation(6, 2);
+            gridEnvironment.addChargingStation(8, 8);
+
             time = System.nanoTime();
-            GridCell destination = new GridCell(28, 29, false,false, false);
+            GridCell destination = new GridCell(8, 8, false,false, false);
             shortestPath = robot.findDestinationStation(gridEnvironment.gridCells, destination);
             System.out.println("Destination Station = " + "[" + shortestPath.row + "]" + "[" + shortestPath.col + "]");
             time = System.nanoTime() - time;

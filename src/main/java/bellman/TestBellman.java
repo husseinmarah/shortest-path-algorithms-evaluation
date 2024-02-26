@@ -78,8 +78,22 @@ private static long runTestForGridSize(int numRows, int numCols, Robot robot) {
     while (nearestChargingStation == null) {
         GridEnvironment gridEnvironment = new GridEnvironment(numRows, numCols);
         // Add obstacles and charging stations randomly
-        gridEnvironment.addMultiObstacles(6);
-        gridEnvironment.addMultiChargingStation(5);
+//        gridEnvironment.addMultiObstacles(6);
+//        gridEnvironment.addMultiChargingStation(5);
+        gridEnvironment.addObstacle(1, 6);
+        gridEnvironment.addObstacle(1, 3);
+        gridEnvironment.addObstacle(3, 4);
+        gridEnvironment.addObstacle(4, 1);
+        gridEnvironment.addObstacle(4, 7);
+        gridEnvironment.addObstacle(6, 5);
+        gridEnvironment.addObstacle(6, 9);
+        gridEnvironment.addObstacle(8, 2);
+        gridEnvironment.addObstacle(9, 6);
+        gridEnvironment.addChargingStation(1, 1);
+        gridEnvironment.addChargingStation(2, 7);
+        gridEnvironment.addChargingStation(6, 2);
+        gridEnvironment.addChargingStation(8, 8);
+
         // Set the source cell
         GridCell source = gridEnvironment.gridCells[robot.currentRow][robot.currentCol];
 //        gridEnvironment.setCurrentPosition(robot);
