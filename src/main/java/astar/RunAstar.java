@@ -10,24 +10,35 @@ import static common.Helpers.printGrid;
 public class RunAstar {
     public static void main(String[] args) {
         // Create the grid and initialize it with obstacles and charging stations.
-        GridEnvironment gridEnvironment = new GridEnvironment(30, 30);
+        GridEnvironment gridEnvironment = new GridEnvironment(10, 10);
 
         // Add obstacles and charging stations in random places
 //        gridEnvironment.addMultiObstacles(6);
 //        gridEnvironment.addMultiChargingStation(5);
 
         // Add static obstacles and charging stations
-        gridEnvironment.addObstacle(20, 20);
-        gridEnvironment.addChargingStation(25, 25);
+        gridEnvironment.addObstacle(1, 6);
+        gridEnvironment.addObstacle(1, 3);
+        gridEnvironment.addObstacle(3, 4);
+        gridEnvironment.addObstacle(4, 1);
+        gridEnvironment.addObstacle(4, 7);
+        gridEnvironment.addObstacle(6, 5);
+        gridEnvironment.addObstacle(6, 9);
+        gridEnvironment.addObstacle(8, 2);
+        gridEnvironment.addObstacle(9, 6);
+        gridEnvironment.addChargingStation(1, 1);
+        gridEnvironment.addChargingStation(2, 7);
+        gridEnvironment.addChargingStation(6, 2);
+        gridEnvironment.addChargingStation(8, 8);
 
         // Print the grid to visualize the environment
         gridEnvironment.print();
 
         // Create and initialize the robot position
-        Robot robot = new Robot(4, 4, 100); // Initialize the position and battery level.
+        Robot robot = new Robot(0, 0, 100); // Initialize the position and battery level.
 
         // Find the destination using A*
-        GridCell destination = new GridCell(1, 21, false, false, false);
+        GridCell destination = new GridCell(8, 8, false, false, false);
         GridCell finalDestination = robot.findDestinationStation(gridEnvironment.gridCells, destination);
 
 

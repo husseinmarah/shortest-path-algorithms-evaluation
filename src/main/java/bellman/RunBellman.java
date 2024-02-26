@@ -17,13 +17,22 @@ public class RunBellman {
     public static void main(String[] args) {
 
         // Create the grid and initialize it with obstacles and charging stations.
-        GridEnvironment gridEnvironment = new GridEnvironment(30, 30);
+        GridEnvironment gridEnvironment = new GridEnvironment(10, 10);
 
-        gridEnvironment.addObstacle(20, 15);
-        gridEnvironment.addChargingStation(1, 29);
-        gridEnvironment.addChargingStation(10,10);
-        gridEnvironment.addChargingStation(6,10);
-        gridEnvironment.addChargingStation(28,2);
+        // Add static obstacles and charging stations
+        gridEnvironment.addObstacle(1, 6);
+        gridEnvironment.addObstacle(1, 3);
+        gridEnvironment.addObstacle(3, 4);
+        gridEnvironment.addObstacle(4, 1);
+        gridEnvironment.addObstacle(4, 7);
+        gridEnvironment.addObstacle(6, 5);
+        gridEnvironment.addObstacle(6, 9);
+        gridEnvironment.addObstacle(8, 2);
+        gridEnvironment.addObstacle(9, 6);
+        gridEnvironment.addChargingStation(1, 1);
+        gridEnvironment.addChargingStation(2, 7);
+        gridEnvironment.addChargingStation(6, 2);
+        gridEnvironment.addChargingStation(8, 8);
 
         gridEnvironment.traverseGrid();
 
@@ -31,7 +40,7 @@ public class RunBellman {
         gridEnvironment.print();
 
         // Create and initialize the robot position
-        Robot robot = new Robot(1, 1, 100); // Example initial position and battery level.
+        Robot robot = new Robot(0, 0, 100); // Example initial position and battery level.
         // Find the nearest charging station using Dijkstra's algorithm.
 
         // Set the source cell
