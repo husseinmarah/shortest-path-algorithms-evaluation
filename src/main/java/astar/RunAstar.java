@@ -38,7 +38,7 @@ public class RunAstar {
         Robot robot = new Robot(0, 0, 100); // Initialize the position and battery level.
 
         // Find the destination using A*
-        GridCell destination = new GridCell(8, 8, false, false, false);
+        GridCell destination = new GridCell(9, 510, false, false, false);
         GridCell finalDestination = robot.findDestinationStation(gridEnvironment.gridCells, destination);
 
 

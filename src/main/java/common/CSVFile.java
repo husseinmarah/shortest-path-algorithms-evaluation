@@ -34,7 +34,7 @@ public static void createCSVFile(String name) {
             e.printStackTrace();
         }
         writer = new CSVWriter(output);
-        String[] header = {"Rows", "Columns", "Number of Cells", "Iteration", "Median Time", "Average Time"};
+        String[] header = {"Rows", "Columns", "Number of Cells", "Iteration", "Median Time", "Average Time", "Total Traversal Time"};
         writer.writeNext(header);
     }
 }
